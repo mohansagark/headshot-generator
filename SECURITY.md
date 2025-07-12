@@ -20,6 +20,7 @@ We will respond to security reports within 48 hours and work with you to resolve
 ## Security Considerations
 
 This application:
+
 - Processes user-uploaded images locally
 - Uses AI models that download from Hugging Face
 - Does not store personal data permanently
@@ -29,6 +30,7 @@ This application:
 ## Best Practices
 
 When deploying this application:
+
 - Use HTTPS in production
 - Implement rate limiting
 - Monitor resource usage
