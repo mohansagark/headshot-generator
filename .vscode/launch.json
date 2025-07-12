@@ -1,0 +1,62 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Streamlit App",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/venv/bin/python",
+      "args": ["-m", "streamlit", "run", "app.py"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Run Example Demo",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/example.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "CLI - Process Image",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/cli.py",
+      "args": [
+        "process",
+        "sample_photo.jpg",
+        "--output",
+        "processed_headshot.jpg"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "CLI - Generate from Prompt",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/cli.py",
+      "args": [
+        "generate",
+        "professional headshot, business attire, studio lighting",
+        "--output",
+        "generated_headshot.jpg"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    }
+  ]
+}

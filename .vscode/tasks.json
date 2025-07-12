@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Launch Headshot Generator Web App",
+      "type": "shell",
+      "command": "/Users/mohansagar/Documents/Projects/GitHub/headshot-generator/venv/bin/python",
+      "args": ["-m", "streamlit", "run", "app.py"],
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "professional-headshot-generator"
+version = "1.0.0"
+description = "AI-powered professional headshot generator using Stable Diffusion and advanced image processing"
+authors = [{name = "Your Name", email = "your.email@example.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "streamlit>=1.28.0",
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "diffusers>=0.21.0",
+    "transformers>=4.30.0",
+    "accelerate>=0.20.0",
+    "pillow>=9.5.0",
+    "opencv-python>=4.8.0",
+    "mediapipe>=0.10.0",
+    "rembg>=2.0.0",
+    "numpy>=1.24.0",
+    "scikit-image>=0.21.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "pytest",
+    "pytest-cov",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/headshot-generator"
+Repository = "https://github.com/yourusername/headshot-generator"
+Issues = "https://github.com/yourusername/headshot-generator/issues"
+
+[project.scripts]
+headshot-generator = "cli:main"
