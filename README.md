@@ -318,6 +318,7 @@ The application is optimized for deployment on Streamlit Cloud with a minimal de
 #### "Out of memory" errors
 
 **Solutions**:
+
 - Use the deployment-optimized requirements: `requirements-deploy.txt`
 - Reduce image sizes before processing
 - Process images one at a time instead of batch processing
@@ -325,6 +326,7 @@ The application is optimized for deployment on Streamlit Cloud with a minimal de
 #### "Model loading timeout"
 
 **Solutions**:
+
 - Use smaller AI models (configured automatically in deployment)
 - Increase memory allocation if using a paid cloud service
 - Be patient during first load - models are cached after initial download

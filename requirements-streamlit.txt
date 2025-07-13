@@ -1,0 +1,24 @@
+# Ultra-minimal requirements for Streamlit Cloud deployment
+# This removes dlib and all problematic packages
+
+# Core web framework
+streamlit>=1.25.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# Basic image processing (without face detection)
+Pillow>=10.0.0
+opencv-python-headless>=4.8.0
+numpy>=1.24.0
+
+# Background removal
+rembg>=2.0.50
+
+# Utilities
+requests>=2.31.0
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+
+# Optional: Basic ML (if memory allows)
+# torch>=2.0.0 --index-url https://download.pytorch.org/whl/cpu
+# torchvision>=0.15.0 --index-url https://download.pytorch.org/whl/cpu
