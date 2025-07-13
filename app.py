@@ -76,7 +76,16 @@ st.markdown("""
 @st.cache_resource
 def load_generator():
     """Load the headshot generator with caching for better performance."""
-    return HeadshotGenerator()
+    try:
+        generator = HeadshotGenerator()
+        # Test basic functionality
+        if hasattr(generator, 'pipeline') and generator.pipeline is None:
+            st.warning("⚠️ AI generation features not available in this deployment. Basic image processing will work.")
+        return generator
+    except Exception as e:
+        st.error(f"Failed to initialize generator: {str(e)}")
+        # Return a minimal generator that can handle basic operations
+        return None
 
 def download_image(image, filename):
     """Create a download button for the processed image."""
@@ -101,13 +110,15 @@ def main():
     st.markdown('<p class="sub-header">Transform your photos into professional headshots using AI</p>', unsafe_allow_html=True)
     
     # Initialize the generator
-    try:
-        generator = load_generator()
-        st.success("✅ AI models loaded successfully!")
-    except Exception as e:
-        st.error(f"❌ Failed to load AI models: {e}")
-        st.info("💡 Please install the required dependencies by running: `pip install -r requirements.txt`")
+    generator = load_generator()
+    
+    if generator is None:
+        st.error("❌ Could not initialize the headshot generator")
+        st.info("💡 This may be due to missing dependencies or memory limitations in the deployment environment.")
+        st.info("🔄 Try refreshing the page or contact support if the issue persists.")
         return
+    
+    st.success("✅ Headshot generator initialized successfully!")
     
     # Sidebar for options
     st.sidebar.title("🎛️ Settings")
