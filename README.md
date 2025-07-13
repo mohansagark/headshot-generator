@@ -280,6 +280,85 @@ black .
 isort .
 ```
 
+## 🚀 Cloud Deployment
+
+### Streamlit Cloud Deployment
+
+The application is optimized for deployment on Streamlit Cloud with a minimal dependency set:
+
+1. **Fork this repository** to your GitHub account
+
+2. **Go to [Streamlit Cloud](https://share.streamlit.io/)**
+
+3. **Connect your GitHub account** and select this repository
+
+4. **Set the main file path** to `app.py`
+
+5. **Advanced settings**:
+   - Python version: `3.11`
+   - Requirements file: `requirements-deploy.txt`
+
+### Deployment Features
+
+- **Automatic dependency optimization**: Uses `requirements-deploy.txt` for cloud compatibility
+- **Memory management**: Optimized for cloud resource limits
+- **Background processing**: Efficient model loading and caching
+- **Error handling**: Graceful fallbacks when advanced features aren't available
+
+## 🐛 Troubleshooting
+
+### Common Deployment Issues
+
+#### "CMake not found" or "dlib installation failed"
+
+**Problem**: Face detection libraries (dlib, mediapipe) require system dependencies not available in cloud environments.
+
+**Solution**: The app automatically falls back to basic processing without face detection. This is expected behavior on cloud platforms.
+
+#### "Out of memory" errors
+
+**Solutions**:
+- Use the deployment-optimized requirements: `requirements-deploy.txt`
+- Reduce image sizes before processing
+- Process images one at a time instead of batch processing
+
+#### "Model loading timeout"
+
+**Solutions**:
+- Use smaller AI models (configured automatically in deployment)
+- Increase memory allocation if using a paid cloud service
+- Be patient during first load - models are cached after initial download
+
+### Local Development Issues
+
+#### GPU/CUDA Issues
+
+```bash
+# For CUDA support (optional)
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# For CPU-only (works everywhere)
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+```
+
+#### Face Detection Issues
+
+```bash
+# If mediapipe installation fails
+pip install mediapipe --no-deps
+pip install opencv-python
+
+# Alternative: use CPU-only version
+pip install mediapipe-cpu
+```
+
+#### Memory Issues
+
+```bash
+# Reduce memory usage
+export PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:256
+```
+
 ## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
