@@ -6,9 +6,30 @@ import base64
 from headshot_generator import HeadshotGenerator
 import gc
 
+# Check deployment environment and show compatibility info
+def check_deployment_compatibility():
+    """Check if running in cloud deployment and show compatibility warnings"""
+    cloud_platform = None
+    if "STREAMLIT_CLOUD" in os.environ:
+        cloud_platform = "Streamlit Cloud"
+    elif "DYNO" in os.environ or "HEROKU_SLUG_COMMIT" in os.environ:
+        cloud_platform = "Heroku"
+    elif "RAILWAY_ENVIRONMENT" in os.environ:
+        cloud_platform = "Railway"
+    
+    if cloud_platform:
+        st.info(f"🌐 Running on {cloud_platform} - Some advanced face detection features may be limited for compatibility")
+        return True
+    return False
+
 # Deployment optimizations
 if "DYNO" in os.environ or "HEROKU_SLUG_COMMIT" in os.environ:
     # Running on Heroku
+    os.environ["TORCH_HOME"] = "/tmp/.torch"
+    os.environ["TRANSFORMERS_CACHE"] = "/tmp/.transformers"
+    os.environ["DIFFUSERS_CACHE"] = "/tmp/.diffusers"
+elif "STREAMLIT_CLOUD" in os.environ:
+    # Running on Streamlit Cloud
     os.environ["TORCH_HOME"] = "/tmp/.torch"
     os.environ["TRANSFORMERS_CACHE"] = "/tmp/.transformers"
     os.environ["DIFFUSERS_CACHE"] = "/tmp/.diffusers"
@@ -72,6 +93,9 @@ def download_image(image, filename):
     )
 
 def main():
+    # Check deployment compatibility
+    check_deployment_compatibility()
+    
     # Header
     st.markdown('<h1 class="main-header">📸 Professional Headshot Generator</h1>', unsafe_allow_html=True)
     st.markdown('<p class="sub-header">Transform your photos into professional headshots using AI</p>', unsafe_allow_html=True)
@@ -381,6 +405,9 @@ def main():
         """)
 
 if __name__ == "__main__":
+    # Check deployment compatibility
+    check_deployment_compatibility()
+    
     main()
 
     # Memory management
